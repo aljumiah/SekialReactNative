@@ -1,9 +1,18 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 37568,
-  "expoServerNgrokUrl": "https://ek-cmk.anonymous.sekialreactnative.exp.direct",
-  "packagerNgrokUrl": "https://packager.ek-cmk.anonymous.sekialreactnative.exp.direct",
-  "ngrokPid": 37588
+
+  //"expoServerPort": 19000,
+  //"packagerPort": 19001,
+  //"packagerPid": 37568,
+  //"expoServerNgrokUrl": "https://ek-cmk.anonymous.sekialreactnative.exp.direct",
+  //"packagerNgrokUrl": "https://packager.ek-cmk.anonymous.sekialreactnative.exp.direct",
+  //"ngrokPid": 37588
+
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
+
 }

@@ -25,7 +25,7 @@ class Login extends Component {
 
   render() {
     if (this.props.user) {
-      //   this.props.navigation.navigate("");
+        this.props.navigation.replace("Home");
     }
     return (
       <View style={styles.container}>
@@ -73,6 +73,7 @@ class Login extends Component {
         >
           <Text>Register</Text>
         </TouchableHighlight>
+
       </View>
     );
   }
@@ -136,3 +137,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login);
+
