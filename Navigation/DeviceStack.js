@@ -1,16 +1,16 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation";
 
-import Login from "../Components/Login";
+import DeviceDetail from "../Components/DeviceDetail";
 import Home from "../Components/Home";
 
 const AuthStack = createStackNavigator(
   {
-    Login: Login,
-    Home: Home
+    Home: Home,
+    DeviceDetail: DeviceDetail
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: "Home",
     cardStyle: {
       backgroundColor: "#b2b2b2"
     },
@@ -19,7 +19,8 @@ const AuthStack = createStackNavigator(
         fontWeight: "bold"
       },
       headerStyle: {
-        backgroundColor: "#373738"
+        backgroundColor: "#373738",
+        color: "red"
       }
     }
   }
