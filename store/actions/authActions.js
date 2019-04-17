@@ -46,17 +46,17 @@ export const login = userData => {
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
       dispatch(setCurrentUser(decodedUser));
-      // navigation.replace("");
     } catch (error) {
       console.error(error);
     }
   };
 };
-export const signup = userData => {
+export const signup = (userData, navigation) => {
   return async dispatch => {
     try {
       await instance.post("customer/register/", userData);
       dispatch(login(userData));
+      navigation.replace("Home");
     } catch (error) {
       console.error(error);
     }
