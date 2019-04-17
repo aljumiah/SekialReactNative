@@ -1,5 +1,4 @@
 import React from "react";
-import Login from "./Components/Login";
 import store from "./store";
 import { Provider } from "react-redux";
 import AppContainer from "./Navigation";
@@ -14,4 +13,3 @@ class App extends React.Component {
   }
 }
 export default App;
-

@@ -14,18 +14,14 @@ import {
 } from "react-native";
 
 class Login extends Component {
-  componentDidMount = () => {
-    this.props.checkForToken();
-  };
-
   state = {
-    username: "",
+    phone_number: "",
     password: ""
   };
 
   render() {
     if (this.props.user) {
-        this.props.navigation.replace("Home");
+      this.props.navigation.replace("Home");
     }
     return (
       <View style={styles.container}>
@@ -39,9 +35,8 @@ class Login extends Component {
           <TextInput
             style={styles.inputs}
             placeholder="Phone Number"
-            keyboardType="username"
-            onChangeText={username => this.setState({ username })}
-            value={this.state.username}
+            onChangeText={phone_number => this.setState({ phone_number })}
+            value={this.state.phone_number}
           />
         </View>
 
@@ -62,18 +57,17 @@ class Login extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.props.login(this.state)}
+          onPress={() => this.props.login(this.state, this.props.navigation)}
         >
           <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight>
 
         <TouchableHighlight
           style={styles.buttonContainer}
-          onPress={() => this.props.signup(this.state)}
+          onPress={() => this.props.navigation.navigate("Signup")}
         >
           <Text>Register</Text>
         </TouchableHighlight>
-
       </View>
     );
   }
@@ -128,13 +122,13 @@ const mapStateToProps = state => ({
   user: state.authReducer.user
 });
 const mapDispatchToProps = dispatch => ({
-  login: userData => dispatch(actionCreators.login(userData)),
-  signup: userData => dispatch(actionCreators.signup(userData)),
-  checkForToken: () => dispatch(actionCreators.checkForExpiredToken())
+  login: (userData, navigation) =>
+    dispatch(actionCreators.login(userData, navigation)),
+  checkForToken: navigation =>
+    dispatch(actionCreators.checkForExpiredToken(navigation))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login);
-
