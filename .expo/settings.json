@@ -3,5 +3,9 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
+
+  //"urlRandomness": "ek-cmk"
+
   "urlRandomness": "a5-794"
+
 }
