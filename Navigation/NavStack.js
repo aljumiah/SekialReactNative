@@ -5,7 +5,9 @@ import {
 } from "react-navigation";
 import React from "react";
 import AuthStack from "../Navigation/AuthStack";
-import DeviceDetail from "../Components/DeviceDetail";
+import DeviceStack from "./DeviceStack";
+// import Device from "./../Components/DeviceDetail";
+
 // const BottomTab = createBottomTabNavigator({
 //   Home: HomeStack
 // });
@@ -21,10 +23,13 @@ import DeviceDetail from "../Components/DeviceDetail";
 const NavStack = createStackNavigator(
   {
     AuthStack: AuthStack,
-    DeviceDetail: DeviceDetail
+    DeviceStack: DeviceStack
   },
   {
-    initialRouteName: "AuthStack"
+    initialRouteName: "AuthStack",
+    defaultNavigationOptions: {
+      header: null
+    }
   }
 );
 export default NavStack;
