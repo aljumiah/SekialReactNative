@@ -7,11 +7,9 @@ import Home from "../Components/Home";
 
 const AuthStack = createStackNavigator(
   {
-
-    Home: Home,
     Login: Login,
-    Signup: Signup
-
+    Signup: Signup,
+    Home: Home
   },
   {
     initialRouteName: "Login",

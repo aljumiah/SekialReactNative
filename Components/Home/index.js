@@ -1,5 +1,8 @@
 import React from "react";
-import {} from "react-native";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions";
+import Logout from "../Logout";
+
 // NativeBase Components
 import {
   Button,
@@ -14,21 +17,15 @@ import {
   Right,
   Icon,
   Left,
-  Body
+  Body,
+  TouchableOpacity
 } from "native-base";
-export default class Home extends React.Component {
-  static navigationOptions = {
-    //title: "Detail",
-    headerRight: (
-      <Text
-        bordered
-        color="#fff"
-        style={{ paddingLeft: 20, fontSize: 16, color: "#fff", padding: 10 }}
-      >
-        Logout
-      </Text>
-    )
-  };
+class Home extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerTitle: "Home",
+    headerRight: <Logout navigation={navigation} />
+  });
+
   render() {
     return (
       <Content>
@@ -91,3 +88,13 @@ export default class Home extends React.Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  user: state.authReducer.user
+});
+const mapDispatchToProps = dispatch => ({
+  logout: navigation => dispatch(actions.logout(navigation))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

@@ -93,7 +93,7 @@ class Signup extends Component {
 
         <TouchableHighlight
           style={styles.buttonContainer}
-          onPress={() => this.props.navigation.navigate("Login")}
+          onPress={() => this.props.navigation.replace("Login")}
         >
           <Text>Login</Text>
         </TouchableHighlight>

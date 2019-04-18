@@ -17,16 +17,17 @@ const setAuthToken = async token => {
   }
 };
 
-export const checkForExpiredToken = () => {
+export const checkForExpiredToken = navigation => {
   return async dispatch => {
     const token = await AsyncStorage.getItem("token");
 
     if (token) {
-      const currentTime = Date.now() / 60;
+      const currentTime = Date.now() / 1000;
       const user = jwt_decode(token);
       if (user.exp >= currentTime) {
         setAuthToken(token);
         dispatch(setCurrentUser(user));
+        navigation.replace("Home");
       } else {
         dispatch(logout());
       }
@@ -38,14 +39,16 @@ const setCurrentUser = user => ({
   payload: user
 });
 
-export const login = userData => {
+export const login = (userData, navigation) => {
   return async dispatch => {
     try {
       let response = await instance.post("user/login/", userData);
+
       let user = response.data;
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
       dispatch(setCurrentUser(decodedUser));
+      // navigation.replace("Home");
     } catch (error) {
       console.error(error);
     }
@@ -63,7 +66,12 @@ export const signup = (userData, navigation) => {
   };
 };
 
-export const logout = () => {
+export const logout = navigation => {
   setAuthToken();
-  return setCurrentUser();
+  return async dispatch => {
+    try {
+      dispatch(setCurrentUser());
+      navigation.replace("Login");
+    } catch {}
+  };
 };

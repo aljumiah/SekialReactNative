@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -15,29 +14,39 @@ import {
 } from "react-native";
 
 class Login extends Component {
+  async componentDidMount() {
+    await this.props.checkForExpiredToken(this.props.navigation);
+    if (this.props.user) {
+      this.props.navigation.replace("Home");
+    }
+  }
+
+  Login = () => {
+    this.props.login(this.state, this.props.navigation);
+    this.props.navigation.replace("Home");
+  };
+
   state = {
-    phone_number: "",
+    username: "",
     password: ""
   };
 
   render() {
-    if (this.props.user) {
-      this.props.navigation.replace("Home");
-    }
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <Image
             style={styles.inputIcon}
             source={{
-              uri: "https://img.icons8.com/ios/80/000000/phone-filled.png"
+              uri:
+                "https://img.icons8.com/ios/80/000000/identification-documents-filled.png"
             }}
           />
           <TextInput
             style={styles.inputs}
-            placeholder="Phone Number"
-            onChangeText={phone_number => this.setState({ phone_number })}
-            value={this.state.phone_number}
+            placeholder="National ID"
+            onChangeText={username => this.setState({ username })}
+            value={this.state.username}
           />
         </View>
 
@@ -58,14 +67,14 @@ class Login extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.props.login(this.state, this.props.navigation)}
+          onPress={this.Login}
         >
           <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight>
 
         <TouchableHighlight
           style={styles.buttonContainer}
-          onPress={() => this.props.navigation.navigate("Signup")}
+          onPress={() => this.props.navigation.replace("Signup")}
         >
           <Text>Register</Text>
         </TouchableHighlight>
@@ -125,7 +134,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   login: (userData, navigation) =>
     dispatch(actionCreators.login(userData, navigation)),
-  checkForToken: navigation =>
+  checkForExpiredToken: navigation =>
     dispatch(actionCreators.checkForExpiredToken(navigation))
 });
 
