@@ -2,6 +2,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { AsyncStorage } from "react-native";
 import * as actionTypes from "./Types";
+import { getDevices } from "./deviceActions";
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/"
@@ -27,6 +28,8 @@ export const checkForExpiredToken = navigation => {
       if (user.exp >= currentTime) {
         setAuthToken(token);
         dispatch(setCurrentUser(user));
+        dispatch(getDevices(token));
+
         navigation.replace("Home");
       } else {
         dispatch(logout());
@@ -48,7 +51,7 @@ export const login = (userData, navigation) => {
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
       dispatch(setCurrentUser(decodedUser));
-      // navigation.replace("Home");
+      dispatch(getDevices(user.token));
     } catch (error) {
       console.error(error);
     }

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import Logout from "../Logout";
-
+import DeviceList from "./DeviceList";
 // NativeBase Components
 import {
   Button,
@@ -27,16 +27,15 @@ class Home extends React.Component {
   });
 
   render() {
+    const showDevices = this.props.devices.map(device => (
+      <DeviceList key={device.id} device={device} />
+    ));
     return (
       <Content>
         <Separator style={{ backgroundColor: "#f5f5f5" }} bordered>
           <Text style={{ color: "#000" }}>YOUR DEVICE</Text>
         </Separator>
-        <ListItem
-          noIndent
-          style={{ backgroundColor: "#FFD07E" }}
-          // onPress={() => this.props.navigation.navigate("DeviceDetail")}
-        >
+        <ListItem noIndent style={{ backgroundColor: "#FFD07E" }}>
           <Left>
             <Icon name="mobile" type="Entypo" style={{ color: "#000" }} />
           </Left>
@@ -67,32 +66,20 @@ class Home extends React.Component {
           </Right>
         </ListItem>
         <Separator style={{ backgroundColor: "#f5f5f5" }}>
-          <Text style={{ color: "#000" }}>OTHER DEVICES YOU OWN </Text>
+          <Text style={{ color: "#000" }}>DEVICES YOU OWN </Text>
         </Separator>
-        <ListItem
-          style={{ backgroundColor: "#B8D0EB" }}
-          last
-          onPress={() => this.props.navigation.navigate("DeviceDetail")}
-        >
-          <Left>
-            <Icon name="mobile" type="Entypo" />
-          </Left>
-          <Body>
-            <Text>IEMI:</Text>
-          </Body>
-          <Right>
-            <Icon name="arrow-forward" style={{ color: "#2B8FFF" }} />
-          </Right>
-        </ListItem>
+        {showDevices}
       </Content>
     );
   }
 }
 const mapStateToProps = state => ({
-  user: state.authReducer.user
+  user: state.authReducer.user,
+  devices: state.devicesReducer.devices
 });
 const mapDispatchToProps = dispatch => ({
-  logout: navigation => dispatch(actions.logout(navigation))
+  logout: navigation => dispatch(actions.logout(navigation)),
+  getDevices: () => dispatch(actions.getDevices())
 });
 export default connect(
   mapStateToProps,
