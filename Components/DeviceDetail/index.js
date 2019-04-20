@@ -1,26 +1,46 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet } from "react-native";
+import {
+  Button,
+  Content,
+  List,
+  ListItem,
+  Text,
+  Separator,
+  View,
+  Right,
+  Icon,
+  Left,
+  Body,
+  TouchableOpacity
+} from "native-base";
 import { withNavigation } from "react-navigation";
 class DeviceDetail extends React.Component {
   static navigationOptions = {
     title: "Detail"
-    // headerLeft: (
-    //   <Text
-    //     bordered
-    //     onPress={() => this.props.navigation.goBack()}
-    //     title="Info"
-    //     color="#fff"
-    //     style={{ paddingLeft: 20, fontSize: 16 }}
-    //   >
-    //     Back
-    //   </Text>
-    // )
   };
   render() {
+    const { navigation } = this.props;
+    const device = navigation.getParam("device");
     return (
-      <View>
-        <Text>DevicesDevicesDevicesDevicesDevicesDevicesDevices</Text>
-      </View>
+      <>
+        {device.is_alerted ? (
+          <Content>
+            <Button full warning>
+              <Text>Remove Alert</Text>
+            </Button>
+          </Content>
+        ) : (
+          <Content>
+            <Button full success>
+              <Text>Transfare Ownership</Text>
+            </Button>
+            <Button full danger>
+              <Text>Alert</Text>
+            </Button>
+          </Content>
+        )}
+      </>
     );
   }
 }

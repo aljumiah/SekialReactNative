@@ -6,8 +6,6 @@ import DeviceList from "./DeviceList";
 // NativeBase Components
 import {
   Button,
-  Container,
-  Header,
   Content,
   List,
   ListItem,
@@ -32,7 +30,7 @@ class Home extends React.Component {
     ));
     return (
       <Content>
-        <Separator style={{ backgroundColor: "#f5f5f5" }} bordered>
+        {/* <Separator style={{ backgroundColor: "#f5f5f5" }} bordered>
           <Text style={{ color: "#000" }}>YOUR DEVICE</Text>
         </Separator>
         <ListItem noIndent style={{ backgroundColor: "#FFD07E" }}>
@@ -64,7 +62,7 @@ class Home extends React.Component {
           <Right>
             <Icon name="arrow-forward" style={{ color: "#229c91" }} />
           </Right>
-        </ListItem>
+        </ListItem> */}
         <Separator style={{ backgroundColor: "#f5f5f5" }}>
           <Text style={{ color: "#000" }}>DEVICES YOU OWN </Text>
         </Separator>
