@@ -34,10 +34,9 @@ class DeviceDetail extends React.Component {
   }
   async addAlert() {
     await this.setState({ is_alerted: true });
-    console.log("from alert", this.state);
     this.handleSubmit();
   }
-  handleSubmit = status => {
+  handleSubmit = () => {
     this.props.changeAlertStatus(
       this.state,
       this.state.id,

@@ -42,7 +42,7 @@ export const transfareUser = (user, deviceID, navigation) => {
       console.log("NEW Owner", newOwner);
       // console.log("navigation", navigation);
       alert("Device has been transfared succesfully");
-      navigation.goBack();
+      //navigation.goBack();
       dispatch(getDevices());
       dispatch({
         type: actionTypes.TRANSFARE_OWNER,
@@ -72,11 +72,9 @@ export const changeAlertStatus = (user, deviceID, navigation) => {
 
       const newOwner = res.data;
       console.log("Status", newOwner);
-      // console.log("navigation", navigation);
       alert(`Alert has been changed to ${newOwner.is_alerted}`);
-      navigation.goBack();
       dispatch(getDevices());
-      navigation.navigate("Home");
+      navigation.goBack();
     } catch (err) {
       console.error("Error while changeding Alert Status", err);
     }

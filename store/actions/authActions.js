@@ -4,6 +4,7 @@ import { AsyncStorage } from "react-native";
 import * as actionTypes from "./Types";
 import { getDevices } from "./deviceActions";
 import { setErrors } from "./errors";
+import { NavigationActions } from "react-navigation";
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/"
@@ -32,7 +33,12 @@ export const checkForExpiredToken = navigation => {
         dispatch(setCurrentUser(user));
         dispatch(getDevices());
 
-        navigation.replace("Home");
+        //navigation.replace("Home");
+        // navigation.navigate(
+        //   "DeviceStack",
+        //   {},
+        //   NavigationActions.navigate({ Home: "Home" })
+        // );
       } else {
         dispatch(logout());
       }
@@ -44,16 +50,24 @@ const setCurrentUser = user => ({
   payload: user
 });
 
-export const login = userData => {
+export const login = (userData, navigation) => {
   return async dispatch => {
     try {
       let response = await instance.post("user/login/", userData);
-
-      let user = response.data.token;
+      console.log("userdata", userData);
+      let user = response.data;
       let decodedUser = jwt_decode(user.token);
+
       setAuthToken(user.token);
+
       dispatch(setCurrentUser(decodedUser));
       dispatch(getDevices());
+      //navigation.replace("Home", { user: true });
+      navigation.navigate(
+        "DeviceStack",
+        {},
+        NavigationActions.navigate({ Home: "Home" })
+      );
     } catch (error) {
       dispatch(setErrors(error));
       console.log(error);
@@ -69,7 +83,12 @@ export const signup = (userData, navigation) => {
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
       dispatch(setCurrentUser(decodedUser));
-      navigation.replace("Home", { user: true });
+      //navigation.replace("Home", { user: true });
+      navigation.navigate(
+        "DeviceStack",
+        {},
+        NavigationActions.navigate({ Home: "Home" })
+      );
     } catch (error) {
       dispatch(setErrors(error));
       console.log(error);
@@ -83,7 +102,11 @@ export const logout = navigation => {
   return async dispatch => {
     try {
       dispatch(setCurrentUser());
-      navigation.replace("Login");
+      navigation.navigate(
+        "AuthStack",
+        {},
+        NavigationActions.navigate({ Login: "Login" })
+      );
     } catch {}
   };
 };

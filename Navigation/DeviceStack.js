@@ -5,7 +5,7 @@ import DeviceDetail from "../Components/DeviceDetail";
 import Home from "../Components/Home";
 import TransfareOwner from "../Components/TransfareOwner";
 
-const AuthStack = createStackNavigator(
+const DeviceStack = createStackNavigator(
   {
     Home: Home,
     DeviceDetail: DeviceDetail,
@@ -28,4 +28,4 @@ const AuthStack = createStackNavigator(
   }
 );
 
-export default AuthStack;
+export default DeviceStack;

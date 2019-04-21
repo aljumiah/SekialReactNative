@@ -23,14 +23,10 @@ class Login extends Component {
     await this.props.errors;
     if (this.props.errors) {
     }
-    console.log(this.props.errors);
   }
 
   Login = () => {
     this.props.login(this.state, this.props.navigation);
-
-    // this.props.navigation.replace("Home");
-    console.log(this.props.errors);
   };
 
   state = {
