@@ -3,11 +3,13 @@ import { createStackNavigator } from "react-navigation";
 
 import DeviceDetail from "../Components/DeviceDetail";
 import Home from "../Components/Home";
+import TransfareOwner from "../Components/TransfareOwner";
 
 const AuthStack = createStackNavigator(
   {
     Home: Home,
-    DeviceDetail: DeviceDetail
+    DeviceDetail: DeviceDetail,
+    TransfareOwner: TransfareOwner
   },
   {
     initialRouteName: "Home",
