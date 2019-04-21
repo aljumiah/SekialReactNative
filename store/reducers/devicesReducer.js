@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/Types";
 
 const initialState = {
   devices: [],
-  loading: true
+  loading: true,
+  newOwner: ""
 };
 
 const devicesReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const devicesReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      };
+    case actionTypes.TRANSFARE_OWNER:
+      return {
+        ...state,
+        newOwner: action.payload
       };
     default:
       return state;

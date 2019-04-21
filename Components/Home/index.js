@@ -6,8 +6,6 @@ import DeviceList from "./DeviceList";
 // NativeBase Components
 import {
   Button,
-  Container,
-  Header,
   Content,
   List,
   ListItem,
@@ -32,39 +30,6 @@ class Home extends React.Component {
     ));
     return (
       <Content>
-        <Separator style={{ backgroundColor: "#f5f5f5" }} bordered>
-          <Text style={{ color: "#000" }}>YOUR DEVICE</Text>
-        </Separator>
-        <ListItem noIndent style={{ backgroundColor: "#FFD07E" }}>
-          <Left>
-            <Icon name="mobile" type="Entypo" style={{ color: "#000" }} />
-          </Left>
-          <Body>
-            <Text>IEMI:</Text>
-          </Body>
-          <Right>
-            <Icon
-              name="exclamationcircle"
-              type="AntDesign"
-              style={{ color: "#F7021C" }}
-            />
-          </Right>
-        </ListItem>
-        <ListItem
-          noIndent
-          style={{ backgroundColor: "#B6D7B9" }}
-          onPress={() => this.props.navigation.navigate("DeviceDetail")}
-        >
-          <Left>
-            <Icon name="mobile" type="Entypo" style={{ color: "#000" }} />
-          </Left>
-          <Body>
-            <Text style={{ color: "#fff" }}>IEMI</Text>
-          </Body>
-          <Right>
-            <Icon name="arrow-forward" style={{ color: "#229c91" }} />
-          </Right>
-        </ListItem>
         <Separator style={{ backgroundColor: "#f5f5f5" }}>
           <Text style={{ color: "#000" }}>DEVICES YOU OWN </Text>
         </Separator>
@@ -79,7 +44,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   logout: navigation => dispatch(actions.logout(navigation)),
-  getDevices: () => dispatch(actions.getDevices())
+  checkForExpiredToken: navigation =>
+    dispatch(actionCreators.checkForExpiredToken(navigation))
 });
 export default connect(
   mapStateToProps,
