@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import * as actionCreators from "../../store/actions";
 import {
   StyleSheet,
@@ -20,10 +19,18 @@ class Login extends Component {
       this.props.navigation.replace("Home");
     }
   }
+  async componentDidUpdate() {
+    await this.props.errors;
+    if (this.props.errors) {
+    }
+    console.log(this.props.errors);
+  }
 
   Login = () => {
     this.props.login(this.state, this.props.navigation);
-    this.props.navigation.replace("Home");
+
+    // this.props.navigation.replace("Home");
+    console.log(this.props.errors);
   };
 
   state = {
@@ -129,7 +136,8 @@ const styles = StyleSheet.create({
   }
 });
 const mapStateToProps = state => ({
-  user: state.authReducer.user
+  user: state.authReducer.user,
+  errors: state.errorReducer.errors
 });
 const mapDispatchToProps = dispatch => ({
   login: (userData, navigation) =>

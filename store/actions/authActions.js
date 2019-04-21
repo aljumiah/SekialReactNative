@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 import { AsyncStorage } from "react-native";
 import * as actionTypes from "./Types";
 import { getDevices } from "./deviceActions";
+import { setErrors } from "./errors";
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/"
@@ -42,29 +43,36 @@ const setCurrentUser = user => ({
   payload: user
 });
 
-export const login = (userData, navigation) => {
+export const login = userData => {
   return async dispatch => {
     try {
       let response = await instance.post("user/login/", userData);
 
-      let user = response.data;
+      let user = response.data.token;
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
       dispatch(setCurrentUser(decodedUser));
       dispatch(getDevices(user.token));
     } catch (error) {
-      console.error(error);
+      dispatch(setErrors(error));
+      console.log(error);
+      alert("Wrong ID or Password");
     }
   };
 };
 export const signup = (userData, navigation) => {
   return async dispatch => {
     try {
-      await instance.post("customer/register/", userData);
-      dispatch(login(userData));
-      navigation.replace("Home");
+      let response = await instance.post("customer/register/", userData);
+      let user = response.data;
+      let decodedUser = jwt_decode(user.token);
+      setAuthToken(user.token);
+      dispatch(setCurrentUser(decodedUser));
+      navigation.replace("Home", { user: true });
     } catch (error) {
-      console.error(error);
+      dispatch(setErrors(error));
+      console.log(error);
+      alert("ID Exist ");
     }
   };
 };
