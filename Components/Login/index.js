@@ -24,9 +24,13 @@ class Login extends Component {
     if (this.props.errors) {
     }
   }
+  resetState = () => {
+    this.setState({ username: null, password: null });
+  };
 
   Login = () => {
     this.props.login(this.state, this.props.navigation);
+    this.resetState();
   };
 
   state = {
@@ -47,6 +51,8 @@ class Login extends Component {
           />
           <TextInput
             style={styles.inputs}
+            maxLength={10}
+            keyboardType="numeric"
             placeholder="National ID"
             onChangeText={username => this.setState({ username })}
             value={this.state.username}
@@ -67,7 +73,6 @@ class Login extends Component {
             onChangeText={password => this.setState({ password })}
           />
         </View>
-
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
           onPress={this.Login}
@@ -126,6 +131,9 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: "#00b5ec"
+  },
+  buttonDisabled: {
+    backgroundColor: "#e7e7e7"
   },
   loginText: {
     color: "white"

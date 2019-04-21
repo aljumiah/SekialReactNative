@@ -6,8 +6,8 @@ import { withNavigation } from "react-navigation";
 
 class TransfareOwner extends React.Component {
   state = {
-    id: null,
-    user: null,
+    id: "",
+    user: "",
     is_alerted: false
   };
   componentDidMount() {
@@ -32,12 +32,27 @@ class TransfareOwner extends React.Component {
         <Form>
           <Item floatingLabel last style={{ backgroundColor: "#fff" }}>
             <Label>NEW OWNER</Label>
-            <Input onChange={this.handleChange} />
+            <Input
+              maxLength={10}
+              keyboardType="numeric"
+              onChange={this.handleChange}
+            />
           </Item>
         </Form>
-        <Button full success onPress={() => this.handleSubmit(device.id)}>
-          <Text>Transfare</Text>
-        </Button>
+        {this.state.user.length > 9 ? (
+          <Button full success onPress={() => this.handleSubmit(device.id)}>
+            <Text>Transfare Ownership</Text>
+          </Button>
+        ) : (
+          <Button
+            full
+            success
+            onPress={() => this.handleSubmit(device.id)}
+            disabled={true}
+          >
+            <Text>Transfare</Text>
+          </Button>
+        )}
       </Content>
     );
   }

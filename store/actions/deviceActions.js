@@ -40,22 +40,43 @@ export const transfareUser = (user, deviceID, navigation) => {
 
       const newOwner = res.data;
       console.log("NEW Owner", newOwner);
-      // console.log("navigation", navigation);
-      alert("Device has been transfared succesfully");
-      //navigation.goBack();
       dispatch(getDevices());
       dispatch({
         type: actionTypes.TRANSFARE_OWNER,
         payload: newOwner
       });
-      navigation.navigate("Home");
+      alert(`Device has been transfared succesfully to ${newOwner.user}`);
+      navigation.navigate("Home", { navigation: navigation });
     } catch (err) {
-      console.error("Error while TRANSFARE_OWNERs", err);
+      alert("this user does not exist");
+      // console.error("Error while TRANSFARE_OWNERs", err);
     }
   };
 };
 
-export const changeAlertStatus = (user, deviceID, navigation) => {
+export const changeAlertStatusTrue = (user, deviceID, navigation) => {
+  return async dispatch => {
+    const Mytoken = await AsyncStorage.getItem("token");
+    try {
+      const res = await axios.put(
+        `http://127.0.0.1:8000/device/${deviceID}/update/`,
+        user,
+        {
+          headers: { Authorization: `JWT ${Mytoken}` }
+        }
+      );
+
+      const newOwner = res.data;
+      alert(`Alert has been changed to ${newOwner.is_alerted}`);
+      dispatch(getDevices());
+      navigation.navigate("Home");
+    } catch (err) {
+      console.error("Error while changeding Alert Status", err);
+    }
+  };
+};
+
+export const changeAlertStatusFalse = (user, deviceID, navigation) => {
   return async dispatch => {
     const Mytoken = await AsyncStorage.getItem("token");
     console.log("MyTOKEN", Mytoken);
@@ -74,7 +95,7 @@ export const changeAlertStatus = (user, deviceID, navigation) => {
       console.log("Status", newOwner);
       alert(`Alert has been changed to ${newOwner.is_alerted}`);
       dispatch(getDevices());
-      navigation.goBack();
+      navigation.navigate("Home");
     } catch (err) {
       console.error("Error while changeding Alert Status", err);
     }
