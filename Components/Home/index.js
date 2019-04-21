@@ -44,7 +44,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   logout: navigation => dispatch(actions.logout(navigation)),
-  getDevices: () => dispatch(actions.getDevices())
+  checkForExpiredToken: navigation =>
+    dispatch(actionCreators.checkForExpiredToken(navigation))
 });
 export default connect(
   mapStateToProps,

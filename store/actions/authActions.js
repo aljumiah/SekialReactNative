@@ -27,8 +27,9 @@ export const checkForExpiredToken = navigation => {
       const user = jwt_decode(token);
       if (user.exp >= currentTime) {
         setAuthToken(token);
+
         dispatch(setCurrentUser(user));
-        dispatch(getDevices(token));
+        dispatch(getDevices());
 
         navigation.replace("Home");
       } else {
@@ -51,7 +52,7 @@ export const login = (userData, navigation) => {
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
       dispatch(setCurrentUser(decodedUser));
-      dispatch(getDevices(user.token));
+      dispatch(getDevices());
     } catch (error) {
       console.error(error);
     }
