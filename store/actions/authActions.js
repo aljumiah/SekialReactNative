@@ -29,18 +29,10 @@ export const checkForExpiredToken = navigation => {
       const user = jwt_decode(token);
       if (user.exp >= currentTime) {
         setAuthToken(token);
-
         dispatch(setCurrentUser(user));
         dispatch(getDevices());
-
-        //navigation.replace("Home");
-        // navigation.navigate(
-        //   "DeviceStack",
-        //   {},
-        //   NavigationActions.navigate({ Home: "Home" })
-        // );
       } else {
-        dispatch(logout());
+        dispatch(logout(navigation));
       }
     }
   };
@@ -54,7 +46,6 @@ export const login = (userData, navigation) => {
   return async dispatch => {
     try {
       let response = await instance.post("user/login/", userData);
-      console.log("userdata", userData);
       let user = response.data;
       let decodedUser = jwt_decode(user.token);
 
@@ -62,7 +53,6 @@ export const login = (userData, navigation) => {
 
       dispatch(setCurrentUser(decodedUser));
       dispatch(getDevices());
-      //navigation.replace("Home", { user: true });
       navigation.navigate(
         "DeviceStack",
         {},
@@ -83,7 +73,6 @@ export const signup = (userData, navigation) => {
       let decodedUser = jwt_decode(user.token);
       setAuthToken(user.token);
       dispatch(setCurrentUser(decodedUser));
-      //navigation.replace("Home", { user: true });
       navigation.navigate(
         "DeviceStack",
         {},

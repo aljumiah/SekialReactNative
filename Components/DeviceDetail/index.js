@@ -30,14 +30,21 @@ class DeviceDetail extends React.Component {
   }
   async removeAlert() {
     await this.setState({ is_alerted: false });
-    this.handleSubmit();
+    this.handleSubmitRemove();
   }
   async addAlert() {
     await this.setState({ is_alerted: true });
-    this.handleSubmit();
+    this.handleSubmitAdd();
   }
-  handleSubmit = () => {
-    this.props.changeAlertStatus(
+  handleSubmitAdd = () => {
+    this.props.changeAlertStatusTrue(
+      this.state,
+      this.state.id,
+      this.props.navigation
+    );
+  };
+  handleSubmitRemove = () => {
+    this.props.changeAlertStatusFalse(
       this.state,
       this.state.id,
       this.props.navigation
@@ -81,8 +88,10 @@ class DeviceDetail extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  changeAlertStatus: (user, deviceID, navigation) =>
-    dispatch(actions.changeAlertStatus(user, deviceID, navigation))
+  changeAlertStatusTrue: (user, deviceID, navigation) =>
+    dispatch(actions.changeAlertStatusTrue(user, deviceID, navigation)),
+  changeAlertStatusFalse: (user, deviceID, navigation) =>
+    dispatch(actions.changeAlertStatusFalse(user, deviceID, navigation))
 });
 export default withNavigation(
   connect(

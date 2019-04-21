@@ -21,6 +21,19 @@ class Signup extends Component {
     password: "",
     email: ""
   };
+  handleSubmit = () => {
+    () => this.props.navigation.replace("Login");
+    this.resetState();
+  };
+  resetState = () => {
+    this.setState({
+      username: null,
+      password: null,
+      phone_number: "",
+      email: null
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -35,6 +48,8 @@ class Signup extends Component {
           <TextInput
             style={styles.inputs}
             placeholder="National ID"
+            maxLength={10}
+            keyboardType="numeric"
             onChangeText={username => this.setState({ username })}
             value={this.state.username}
           />
@@ -49,8 +64,12 @@ class Signup extends Component {
           />
           <TextInput
             style={styles.inputs}
-            placeholder="Phone Number"
-            onChangeText={phone_number => this.setState({ phone_number })}
+            maxLength={12}
+            keyboardType="numeric"
+            placeholder="966 55 555 555"
+            onChangeText={phone_number =>
+              this.setState({ phone_number: phone_number })
+            }
             value={this.state.phone_number}
           />
         </View>
@@ -83,13 +102,26 @@ class Signup extends Component {
             value={this.state.email}
           />
         </View>
-
-        <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.props.signup(this.state, this.props.navigation)}
-        >
-          <Text style={styles.loginText}>signup</Text>
-        </TouchableHighlight>
+        {(this.state.password.length > 3) &
+        (this.state.phone_number.length > 11) ? (
+          <TouchableHighlight
+            style={[styles.buttonContainer, styles.loginButton]}
+            onPress={() => this.props.signup(this.state, this.props.navigation)}
+          >
+            <Text style={styles.loginText}>signup</Text>
+          </TouchableHighlight>
+        ) : (
+          <TouchableHighlight
+            style={[
+              styles.buttonContainer,
+              styles.buttonDisabled,
+              styles.TextDisabled
+            ]}
+            // onPress={() => this.props.signup(this.state, this.props.navigation)}
+          >
+            <Text style={styles.loginText}>signup</Text>
+          </TouchableHighlight>
+        )}
 
         <TouchableHighlight
           style={styles.buttonContainer}
@@ -139,6 +171,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 250,
     borderRadius: 30
+  },
+  buttonDisabled: {
+    backgroundColor: "#e7e7e7"
+  },
+  TextDisabled: {
+    // color: "#000"
   },
   loginButton: {
     backgroundColor: "#00b5ec"

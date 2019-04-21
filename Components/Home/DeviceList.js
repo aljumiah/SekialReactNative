@@ -19,11 +19,14 @@ class DeviceList extends React.Component {
             }
           >
             <Left>
-              <Icon name="mobile" type="Entypo" style={{ color: "#000" }} />
-            </Left>
-            <Body>
+              <Icon
+                name="mobile"
+                type="Entypo"
+                style={{ color: "#000", marginRight: 10 }}
+              />
               <Text>{device.iemi_id}</Text>
-            </Body>
+            </Left>
+
             <Right>
               <Icon
                 name="exclamationcircle"
@@ -41,13 +44,16 @@ class DeviceList extends React.Component {
             }
           >
             <Left>
-              <Icon name="mobile" type="Entypo" />
-            </Left>
-            <Body>
+              <Icon name="mobile" type="Entypo" style={{ marginRight: 10 }} />
               <Text>{device.iemi_id}</Text>
-            </Body>
+            </Left>
+
             <Right>
-              <Icon name="arrow-forward" style={{ color: "#2B8FFF" }} />
+              <Icon
+                name="ios-arrow-forward"
+                type="Ionicons"
+                style={{ color: "#2B8FFF" }}
+              />
             </Right>
           </ListItem>
         )}
