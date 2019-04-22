@@ -1,15 +1,12 @@
 import axios from "axios";
 import * as actionTypes from "./Types";
-import { AsyncStorage } from "react-native";
 
 export const getDevices = () => {
   return async dispatch => {
     dispatch(setDeviceLoading());
-    const token = await AsyncStorage.getItem("token");
+
     try {
-      const res = await axios.get("http://127.0.0.1:8000/device/list/", {
-        headers: { Authorization: `JWT ${token}` }
-      });
+      const res = await axios.get("http://127.0.0.1:8000/device/list/");
       const devices = res.data;
 
       dispatch({
@@ -25,17 +22,15 @@ export const getDevices = () => {
 export const transfareUser = (user, deviceID, navigation) => {
   return async dispatch => {
     dispatch(setDeviceLoading());
-    const Mytoken = await AsyncStorage.getItem("token");
-    console.log("MyTOKEN", Mytoken);
+    //const Mytoken = await AsyncStorage.getItem("token");
+    console.log(
+      "AUTH transfareuser:",
+      axios.defaults.headers.common.Authorization
+    );
     try {
-      console.log("NEW USER", user);
-
       const res = await axios.put(
         `http://127.0.0.1:8000/device/${deviceID}/update/`,
-        user,
-        {
-          headers: { Authorization: `JWT ${Mytoken}` }
-        }
+        user
       );
 
       const newOwner = res.data;
@@ -56,14 +51,10 @@ export const transfareUser = (user, deviceID, navigation) => {
 
 export const changeAlertStatusTrue = (user, deviceID, navigation) => {
   return async dispatch => {
-    const Mytoken = await AsyncStorage.getItem("token");
     try {
       const res = await axios.put(
         `http://127.0.0.1:8000/device/${deviceID}/update/`,
-        user,
-        {
-          headers: { Authorization: `JWT ${Mytoken}` }
-        }
+        user
       );
 
       const newOwner = res.data;
@@ -78,17 +69,10 @@ export const changeAlertStatusTrue = (user, deviceID, navigation) => {
 
 export const changeAlertStatusFalse = (user, deviceID, navigation) => {
   return async dispatch => {
-    const Mytoken = await AsyncStorage.getItem("token");
-    console.log("MyTOKEN", Mytoken);
     try {
-      console.log("NEW Status Alert", user);
-
       const res = await axios.put(
         `http://127.0.0.1:8000/device/${deviceID}/update/`,
-        user,
-        {
-          headers: { Authorization: `JWT ${Mytoken}` }
-        }
+        user
       );
 
       const newOwner = res.data;

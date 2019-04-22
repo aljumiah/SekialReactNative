@@ -15,14 +15,11 @@ import {
 class Login extends Component {
   async componentDidMount() {
     await this.props.checkForExpiredToken(this.props.navigation);
-    if (this.props.user) {
-      this.props.navigation.replace("Home");
-    }
   }
   async componentDidUpdate() {
-    await this.props.errors;
-    if (this.props.errors) {
-    }
+    // await this.props.errors;
+    // if (this.props.errors) {
+    // }
   }
   resetState = () => {
     this.setState({ username: null, password: null });

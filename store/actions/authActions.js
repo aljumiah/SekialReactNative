@@ -26,11 +26,16 @@ export const checkForExpiredToken = navigation => {
 
     if (token) {
       const currentTime = Date.now() / 1000;
-      const user = jwt_decode(token);
+      const user = await jwt_decode(token);
       if (user.exp >= currentTime) {
-        setAuthToken(token);
-        dispatch(setCurrentUser(user));
-        dispatch(getDevices());
+        await setAuthToken(token);
+        await dispatch(setCurrentUser(user));
+        navigation.navigate(
+          "DeviceStack",
+          {},
+          NavigationActions.navigate({ Home: "Home" })
+        );
+        await dispatch(getDevices());
       } else {
         dispatch(logout(navigation));
       }
@@ -49,10 +54,10 @@ export const login = (userData, navigation) => {
       let user = response.data;
       let decodedUser = jwt_decode(user.token);
 
-      setAuthToken(user.token);
+      await setAuthToken(user.token);
+      await dispatch(setCurrentUser(decodedUser));
+      await dispatch(getDevices());
 
-      dispatch(setCurrentUser(decodedUser));
-      dispatch(getDevices());
       navigation.navigate(
         "DeviceStack",
         {},
