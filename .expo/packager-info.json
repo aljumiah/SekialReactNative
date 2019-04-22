@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://zw-i9s.aljumiah.sekialreactnative.exp.direct",
+  "packagerNgrokUrl": "https://packager.zw-i9s.aljumiah.sekialreactnative.exp.direct",
+  "ngrokPid": 12010
 }

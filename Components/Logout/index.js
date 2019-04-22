@@ -6,7 +6,6 @@ import * as actions from "../../store/actions";
 import { Button, Text } from "native-base";
 class Logout extends React.Component {
   handleLogout = () => {
-    console.log("handing logut");
     this.props.logout(this.props.navigation);
   };
 
