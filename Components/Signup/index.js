@@ -21,16 +21,18 @@ class Signup extends Component {
     password: "",
     email: ""
   };
-  handleSubmit = () => {
-    () => this.props.navigation.replace("Login");
+  handleSubmit = async () => {
+    // () => this.props.navigation.replace("Login");
+    await this.props.signup(this.state, this.props.navigation);
     this.resetState();
   };
   resetState = () => {
+    console.log("resetState");
     this.setState({
-      username: null,
-      password: null,
+      username: "",
+      password: "",
       phone_number: "",
-      email: null
+      email: ""
     });
   };
 
@@ -99,14 +101,13 @@ class Signup extends Component {
             style={styles.inputs}
             placeholder="Email"
             onChangeText={email => this.setState({ email })}
-            value={this.state.email}
           />
         </View>
         {(this.state.password.length > 3) &
         (this.state.phone_number.length > 11) ? (
           <TouchableHighlight
             style={[styles.buttonContainer, styles.loginButton]}
-            onPress={() => this.props.signup(this.state, this.props.navigation)}
+            onPress={this.handleSubmit}
           >
             <Text style={styles.loginText}>signup</Text>
           </TouchableHighlight>

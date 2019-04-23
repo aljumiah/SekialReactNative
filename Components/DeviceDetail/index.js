@@ -23,9 +23,9 @@ class DeviceDetail extends React.Component {
     user: null,
     is_alerted: null
   };
-  componentDidMount() {
+  async componentDidMount() {
     const device = this.props.navigation.getParam("device");
-    this.setState({ id: device.id, user: device.user });
+    await this.setState({ id: device.id, user: device.user.username });
     console.log(`device id: ${device.id} | user:${device.user}`);
   }
   async removeAlert() {
@@ -51,7 +51,7 @@ class DeviceDetail extends React.Component {
     );
   };
   static navigationOptions = {
-    title: "Detail"
+    title: ""
   };
   render() {
     const { navigation } = this.props;
