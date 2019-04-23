@@ -39,7 +39,7 @@ class TransfareOwner extends React.Component {
             />
           </Item>
         </Form>
-        {this.state.user.length > 9 ? (
+        {this.state.user.length > 1 ? (
           <Button full success onPress={() => this.handleSubmit(device.id)}>
             <Text>Transfare Ownership</Text>
           </Button>

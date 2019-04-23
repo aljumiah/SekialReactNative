@@ -20,7 +20,7 @@ import {
 } from "native-base";
 class Home extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: "Home",
+    headerTitle: "",
     headerRight: <Logout navigation={navigation} />
   });
 

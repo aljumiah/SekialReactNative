@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./Types";
+import { AsyncStorage } from "react-native";
 
 export const getDevices = () => {
   return async dispatch => {
@@ -51,6 +52,9 @@ export const transfareUser = (user, deviceID, navigation) => {
 
 export const changeAlertStatusTrue = (user, deviceID, navigation) => {
   return async dispatch => {
+    console.log("user all", user);
+    console.log("deviceID", deviceID);
+    console.log("token", axios.defaults.headers.common.Authorization);
     try {
       const res = await axios.put(
         `http://127.0.0.1:8000/device/${deviceID}/update/`,
@@ -69,10 +73,17 @@ export const changeAlertStatusTrue = (user, deviceID, navigation) => {
 
 export const changeAlertStatusFalse = (user, deviceID, navigation) => {
   return async dispatch => {
+    const Mytoken = await AsyncStorage.getItem("token");
+    console.log("MyTOKEN", Mytoken);
     try {
+      console.log("NEW Status Alert", user);
+
       const res = await axios.put(
         `http://127.0.0.1:8000/device/${deviceID}/update/`,
-        user
+        user,
+        {
+          headers: { Authorization: `JWT ${Mytoken}` }
+        }
       );
 
       const newOwner = res.data;

@@ -76,8 +76,9 @@ export const signup = (userData, navigation) => {
       let response = await instance.post("customer/register/", userData);
       let user = response.data;
       let decodedUser = jwt_decode(user.token);
-      setAuthToken(user.token);
-      dispatch(setCurrentUser(decodedUser));
+      await setAuthToken(user.token);
+      await dispatch(setCurrentUser(decodedUser));
+      await dispatch(getDevices());
       navigation.navigate(
         "DeviceStack",
         {},
