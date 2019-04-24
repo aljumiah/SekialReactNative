@@ -33,7 +33,7 @@ class TransfareOwner extends React.Component {
           <Item floatingLabel last style={{ backgroundColor: "#fff" }}>
             <Label>NEW OWNER</Label>
             <Input
-              maxLength={10}
+              maxLength={14}
               keyboardType="numeric"
               onChange={this.handleChange}
             />
