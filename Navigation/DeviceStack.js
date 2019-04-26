@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation";
-
+import { Text } from "react-native";
 import DeviceDetail from "../Components/DeviceDetail";
 import Home from "../Components/Home";
 import TransfareOwner from "../Components/TransfareOwner";
@@ -14,15 +14,16 @@ const DeviceStack = createStackNavigator(
   {
     initialRouteName: "Home",
     cardStyle: {
-      backgroundColor: "#b2b2b2"
+      backgroundColor: "transparent",
+      borderRadius: 8
     },
     defaultNavigationOptions: {
+      headerTintColor: "#00F7EA",
       headerTitleStyle: {
         fontWeight: "bold"
       },
       headerStyle: {
-        backgroundColor: "#373738",
-        color: "red"
+        backgroundColor: "transparent"
       }
     }
   }

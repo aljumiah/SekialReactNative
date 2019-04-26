@@ -1,21 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
-import { TouchableOpacity } from "react-native";
 // NativeBase Components
-import { Text } from "native-base";
-class Logout extends React.Component {
-  handleLogout = () => {
-    this.props.logout(this.props.navigation);
-  };
+import { Text, Icon } from "native-base";
+class DeviceID extends React.Component {
+  handleLogout = () => {};
 
   render() {
+    const device = this.props.navigation.getParam("device");
     return (
-      <TouchableOpacity onPress={() => this.handleLogout()}>
-        <Text style={{ color: "#f1c601", fontWeight: "600", paddingRight: 20 }}>
-          Logout
+      <>
+        <Icon
+          name="mobile"
+          type="Entypo"
+          style={{ marginRight: 10, color: "#fff", fontSize: 17 }}
+        />
+        <Text style={{ color: "#fff", fontWeight: "400" }}>
+          {device.iemi_id}
         </Text>
-      </TouchableOpacity>
+      </>
     );
   }
 }
@@ -28,4 +31,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Logout);
+)(DeviceID);
