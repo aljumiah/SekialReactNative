@@ -49,9 +49,12 @@ export const transfareUser = (user, deviceID, navigation) => {
     }
   };
 };
-
+export const setDeviceLoading = () => ({
+  type: actionTypes.DEVICE_LOADING
+});
 export const changeAlertStatusTrue = (user, deviceID, navigation) => {
   return async dispatch => {
+    dispatch(setDeviceLoading());
     console.log("user all", user);
     console.log("deviceID", deviceID);
     console.log("token", axios.defaults.headers.common.Authorization);
@@ -73,6 +76,7 @@ export const changeAlertStatusTrue = (user, deviceID, navigation) => {
 
 export const changeAlertStatusFalse = (user, deviceID, navigation) => {
   return async dispatch => {
+    dispatch(setDeviceLoading());
     const Mytoken = await AsyncStorage.getItem("token");
     console.log("MyTOKEN", Mytoken);
     try {
@@ -96,7 +100,3 @@ export const changeAlertStatusFalse = (user, deviceID, navigation) => {
     }
   };
 };
-
-export const setDeviceLoading = () => ({
-  type: actionTypes.DEVICE_LOADING
-});

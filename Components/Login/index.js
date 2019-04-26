@@ -11,16 +11,13 @@ import {
   Image,
   Alert
 } from "react-native";
+import { LinearGradient } from "expo";
 
 class Login extends Component {
   async componentDidMount() {
     await this.props.checkForExpiredToken(this.props.navigation);
   }
-  async componentDidUpdate() {
-    // await this.props.errors;
-    // if (this.props.errors) {
-    // }
-  }
+
   resetState = () => {
     this.setState({ username: null, password: null });
   };
@@ -37,53 +34,60 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri:
-                "https://img.icons8.com/ios/80/000000/identification-documents-filled.png"
-            }}
-          />
-          <TextInput
-            style={styles.inputs}
-            maxLength={10}
-            keyboardType="numeric"
-            placeholder="National ID"
-            onChangeText={username => this.setState({ username })}
-            value={this.state.username}
-          />
-        </View>
+      <LinearGradient
+        colors={["#0f7383", "#042630"]}
+        style={{ flex: 1 }}
+        start={[0, 0]}
+        end={[1, 0]}
+      >
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
+            <Image
+              style={styles.inputIcon}
+              source={{
+                uri:
+                  "https://img.icons8.com/ios/80/000000/identification-documents-filled.png"
+              }}
+            />
+            <TextInput
+              style={styles.inputs}
+              maxLength={10}
+              keyboardType="numeric"
+              placeholder="National ID"
+              onChangeText={username => this.setState({ username })}
+              value={this.state.username}
+            />
+          </View>
 
-        <View style={styles.inputContainer}>
-          <Image
-            style={styles.inputIcon}
-            source={{
-              uri: "https://img.icons8.com/ios/80/000000/lock-2-filled.png"
-            }}
-          />
-          <TextInput
-            style={styles.inputs}
-            placeholder="Password"
-            secureTextEntry={true}
-            onChangeText={password => this.setState({ password })}
-          />
-        </View>
-        <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
-          onPress={this.Login}
-        >
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableHighlight>
+          <View style={styles.inputContainer}>
+            <Image
+              style={styles.inputIcon}
+              source={{
+                uri: "https://img.icons8.com/ios/80/000000/lock-2-filled.png"
+              }}
+            />
+            <TextInput
+              style={styles.inputs}
+              placeholder="Password"
+              secureTextEntry={true}
+              onChangeText={password => this.setState({ password })}
+            />
+          </View>
+          <TouchableHighlight
+            style={[styles.buttonContainer, styles.loginButton]}
+            onPress={this.Login}
+          >
+            <Text style={{ color: "#fff" }}>Login</Text>
+          </TouchableHighlight>
 
-        <TouchableHighlight
-          style={styles.buttonContainer}
-          onPress={() => this.props.navigation.replace("Signup")}
-        >
-          <Text>Register</Text>
-        </TouchableHighlight>
-      </View>
+          <TouchableHighlight
+            style={{}}
+            onPress={() => this.props.navigation.replace("Signup")}
+          >
+            <Text style={{ color: "#00F7EA" }}>Register</Text>
+          </TouchableHighlight>
+        </View>
+      </LinearGradient>
     );
   }
 }
@@ -91,8 +95,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#DCDCDC"
+    alignItems: "center"
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
@@ -124,10 +127,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
     width: 250,
-    borderRadius: 30
+    borderRadius: 30,
+    borderWidth: 0.8,
+    borderColor: "#d6d7da"
   },
   loginButton: {
-    backgroundColor: "#00b5ec"
+    backgroundColor: "transparent"
   },
   buttonDisabled: {
     backgroundColor: "#e7e7e7"

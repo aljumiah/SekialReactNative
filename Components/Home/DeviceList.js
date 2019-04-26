@@ -13,7 +13,7 @@ class DeviceList extends React.Component {
         {device.is_alerted ? (
           <ListItem
             noIndent
-            style={{ backgroundColor: "#FFD07E" }}
+            style={{ backgroundColor: "transparnt" }}
             onPress={() =>
               this.props.navigation.navigate("DeviceDetail", { device: device })
             }
@@ -22,37 +22,48 @@ class DeviceList extends React.Component {
               <Icon
                 name="mobile"
                 type="Entypo"
-                style={{ color: "#000", marginRight: 10 }}
+                style={{ color: "#f1c601", marginRight: 10 }}
               />
-              <Text>{device.iemi_id}</Text>
+              <Text style={{ color: "#f1c601", fontWeight: "700" }}>
+                {device.iemi_id}
+              </Text>
             </Left>
 
             <Right>
               <Icon
                 name="exclamationcircle"
                 type="AntDesign"
-                style={{ color: "#F7021C" }}
+                style={{ color: "#f1c601" }}
               />
             </Right>
           </ListItem>
         ) : (
           <ListItem
-            style={{ backgroundColor: "#B8D0EB" }}
+            // style={{ backgroundColor: "#B8D0EB" }}
+            style={{
+              backgroundColor: "transparnt"
+            }}
             last
             onPress={() =>
               this.props.navigation.navigate("DeviceDetail", { device: device })
             }
           >
             <Left>
-              <Icon name="mobile" type="Entypo" style={{ marginRight: 10 }} />
-              <Text>{device.iemi_id}</Text>
+              <Icon
+                name="mobile"
+                type="Entypo"
+                style={{ marginRight: 10, color: "#00F7EA" }}
+              />
+              <Text style={{ color: "#00F7EA", fontWeight: "700" }}>
+                {device.iemi_id}
+              </Text>
             </Left>
 
             <Right>
               <Icon
                 name="ios-arrow-forward"
                 type="Ionicons"
-                style={{ color: "#2B8FFF" }}
+                style={{ color: "#00F7EA" }}
               />
             </Right>
           </ListItem>

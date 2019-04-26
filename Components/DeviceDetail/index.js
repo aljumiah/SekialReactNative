@@ -2,21 +2,11 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
-import {
-  Button,
-  Content,
-  List,
-  ListItem,
-  Text,
-  Separator,
-  View,
-  Right,
-  Icon,
-  Left,
-  Body,
-  TouchableOpacity
-} from "native-base";
+import { Button, Content, Text, Spinner } from "native-base";
 import { withNavigation } from "react-navigation";
+import { LinearGradient } from "expo";
+import DeviceID from "./DeviceID";
+
 class DeviceDetail extends React.Component {
   state = {
     id: null,
@@ -26,7 +16,7 @@ class DeviceDetail extends React.Component {
   async componentDidMount() {
     const device = this.props.navigation.getParam("device");
     await this.setState({ id: device.id, user: device.user.username });
-    console.log(`device id: ${device.id} | user:${device.user}`);
+    console.log(`device id: ${device.id} | device:${device.iemi_id}`);
   }
   async removeAlert() {
     await this.setState({ is_alerted: false });
@@ -50,42 +40,89 @@ class DeviceDetail extends React.Component {
       this.props.navigation
     );
   };
-  static navigationOptions = {
-    title: ""
-  };
+
+  static navigationOptions = ({ navigation }) => ({
+    headerBackground: (
+      <LinearGradient
+        colors={["#042630", "#0f7383"]}
+        style={{ flex: 1 }}
+        start={[1, 1]}
+        end={[1, 0]}
+      />
+    ),
+    headerTitle: <DeviceID navigation={navigation} />
+  });
+
   render() {
     const { navigation } = this.props;
     const device = navigation.getParam("device");
     return (
-      <>
-        {device.is_alerted ? (
-          <Content>
-            <Button full warning onPress={() => this.removeAlert()}>
-              <Text>Remove Alert</Text>
-            </Button>
-          </Content>
+      <LinearGradient
+        colors={["#0f7383", "#042630"]}
+        style={{ flex: 1, justifyContent: "center" }}
+        start={[0, 1]}
+        end={[1, 0]}
+      >
+        {this.props.loading ? (
+          <Spinner color="#00F7EA" />
         ) : (
-          <Content>
-            <Button
-              full
-              success
-              onPress={() =>
-                this.props.navigation.navigate("TransfareOwner", {
-                  device: device
-                })
-              }
-            >
-              <Text>Transfare Ownership</Text>
-            </Button>
-            <Button full danger onPress={() => this.addAlert()}>
-              <Text>Alert</Text>
-            </Button>
-          </Content>
+          <>
+            {device.is_alerted ? (
+              <Content style={{ marginTop: "50%" }}>
+                <Button
+                  block
+                  rounded
+                  warning
+                  onPress={() => this.removeAlert()}
+                >
+                  <Text>Remove Alert</Text>
+                </Button>
+              </Content>
+            ) : (
+              <Content style={{ marginTop: "50%" }}>
+                <Button
+                  style={{ borderColor: "#00F7EA", marginTop: 10 }}
+                  block
+                  rounded
+                  transparent
+                  bordered
+                  onPress={() =>
+                    this.props.navigation.navigate("TransfareOwner", {
+                      device: device
+                    })
+                  }
+                >
+                  <Text style={{ color: "#00F7EA", fontWeight: "700" }}>
+                    Transfare Ownership
+                  </Text>
+                </Button>
+                <Button
+                  style={{
+                    borderColor: "#f1c601",
+                    borderWidth: "700",
+                    marginTop: 10
+                  }}
+                  block
+                  rounded
+                  transparent
+                  bordered
+                  onPress={() => this.addAlert()}
+                >
+                  <Text style={{ color: "#f1c601", fontWeight: "700" }}>
+                    Lost The Device
+                  </Text>
+                </Button>
+              </Content>
+            )}
+          </>
         )}
-      </>
+      </LinearGradient>
     );
   }
 }
+const mapStateToProps = state => ({
+  loading: state.devicesReducer.loading
+});
 
 const mapDispatchToProps = dispatch => ({
   changeAlertStatusTrue: (user, deviceID, navigation) =>
@@ -95,7 +132,7 @@ const mapDispatchToProps = dispatch => ({
 });
 export default withNavigation(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(DeviceDetail)
 );
