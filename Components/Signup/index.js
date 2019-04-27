@@ -11,7 +11,7 @@ import {
   Button,
   TouchableHighlight,
   Image,
-  Alert
+  List
 } from "react-native";
 
 class Signup extends Component {
@@ -183,7 +183,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user
+  user: state.authReducer.user,
+  loading: state.devicesReducer.loading,
+  errors: state.errorReducer.errors
 });
 const mapDispatchToProps = dispatch => ({
   signup: (userData, navigation) =>

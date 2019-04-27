@@ -67,6 +67,7 @@ export const login = (userData, navigation) => {
       );
     } catch (error) {
       dispatch(setDeviceLoading(false));
+
       dispatch(setErrors(error));
       console.log(error);
       //alert("Wrong ID or Password");
@@ -76,7 +77,7 @@ export const login = (userData, navigation) => {
 export const signup = (userData, navigation) => {
   return async dispatch => {
     try {
-      let response = await instance.post("customer/register/", userData);
+      let response = await instance.post("user/register/", userData);
       let user = response.data;
       let decodedUser = jwt_decode(user.token);
       await setAuthToken(user.token);
@@ -88,9 +89,12 @@ export const signup = (userData, navigation) => {
         NavigationActions.navigate({ Home: "Home" })
       );
     } catch (error) {
-      dispatch(setErrors(error));
+      dispatch({
+        type: actionTypes.SET_ERRORS,
+        payload: error.response.data
+      });
       console.log(error);
-      alert("ID Exist ");
+      // alert("ID Exist ");
     }
   };
 };

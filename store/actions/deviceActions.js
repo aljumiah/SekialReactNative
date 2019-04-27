@@ -76,9 +76,7 @@ export const changeAlertStatusTrue = (user, deviceID, navigation) => {
       );
 
       const newOwner = res.data;
-      alert(
-        `Device status with ${newOwner.iemi_id} iemi has been changed to Lost`
-      );
+      alert(`Device status has been changed to Lost`);
       dispatch(getDevices());
       navigation.navigate("Home");
     } catch (err) {
@@ -110,9 +108,9 @@ export const changeAlertStatusFalse = (user, deviceID, navigation) => {
         }
       );
 
-      const newOwner = res.data;
+      const newOwner = await res.data;
       console.log("Status", newOwner);
-      alert(`Alert with ${newOwner.iemi_id} iemi has been removed `);
+      alert(`Alert has been removed from your device`);
       dispatch(getDevices());
       navigation.navigate("Home");
     } catch (err) {
