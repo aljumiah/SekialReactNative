@@ -9,7 +9,9 @@ import {
   Input,
   Item,
   Label,
-  Spinner
+  Spinner,
+  ListItem,
+  List
 } from "native-base";
 import { withNavigation } from "react-navigation";
 import { LinearGradient } from "expo";
@@ -59,6 +61,18 @@ class TransfareOwner extends React.Component {
         ) : (
           <Content>
             <Form style={{ marginTop: "50%" }}>
+              {!!this.props.errors.length && (
+                <List style={{ marginLeft: 10 }}>
+                  {this.props.errors.map(error => (
+                    <List key={error}>
+                      <Text style={{ color: "#f1c601" }}>
+                        <Text style={{ color: "#f1c601" }}>{error}</Text>
+                      </Text>
+                    </List>
+                  ))}
+                </List>
+              )}
+
               <Item rounded style={{ backgroundColor: "#fff", marginTop: 20 }}>
                 <Label
                   style={{
@@ -76,7 +90,7 @@ class TransfareOwner extends React.Component {
                 />
               </Item>
             </Form>
-            {this.state.user.length > 1 ? (
+            {this.state.user.length > 9 ? (
               <Button
                 style={{
                   borderColor: "#00F7EA",
@@ -116,7 +130,8 @@ class TransfareOwner extends React.Component {
 const mapStateToProps = state => ({
   user: state.authReducer.user,
   devices: state.devicesReducer.devices,
-  loading: state.devicesReducer.loading
+  loading: state.devicesReducer.loading,
+  errors: state.errorReducer.errors
 });
 const mapDispatchToProps = dispatch => ({
   transfareUser: (user, deviceID, navigation) =>

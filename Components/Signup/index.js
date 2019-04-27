@@ -121,7 +121,7 @@ class Signup extends Component {
             style={{}}
             onPress={() => this.props.navigation.replace("Login")}
           >
-            <Text style={{ color: "#fff" }}>Login</Text>
+            <Text style={{ color: "#00F7EA" }}>Login</Text>
           </TouchableHighlight>
         </View>
       </LinearGradient>
