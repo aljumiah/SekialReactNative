@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = state => ({
   user: state.authReducer.user,
-  errors: state.errorReducer.errors
+  errors: state.errorReducer.errors,
+  loading: state.devicesReducer.loading
 });
 const mapDispatchToProps = dispatch => ({
   login: (userData, navigation) =>

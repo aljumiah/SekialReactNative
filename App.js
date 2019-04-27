@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import AppContainer from "./Navigation";
 import { StatusBar } from "react-native";
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
       <>
@@ -17,4 +17,3 @@ class App extends React.Component {
     );
   }
 }
-export default App;

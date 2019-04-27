@@ -5,6 +5,7 @@ import * as actionTypes from "./Types";
 import { getDevices } from "./deviceActions";
 import { setErrors } from "./errors";
 import { NavigationActions } from "react-navigation";
+import { setDeviceLoading } from "./deviceActions";
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/"
@@ -49,6 +50,7 @@ const setCurrentUser = user => ({
 
 export const login = (userData, navigation) => {
   return async dispatch => {
+    dispatch(setDeviceLoading(true));
     try {
       let response = await instance.post("user/login/", userData);
       let user = response.data;
@@ -57,16 +59,17 @@ export const login = (userData, navigation) => {
       await setAuthToken(user.token);
       await dispatch(setCurrentUser(decodedUser));
       await dispatch(getDevices());
-
+      dispatch(setDeviceLoading(false));
       navigation.navigate(
         "DeviceStack",
         {},
         NavigationActions.navigate({ Home: "Home" })
       );
     } catch (error) {
+      dispatch(setDeviceLoading(false));
       dispatch(setErrors(error));
       console.log(error);
-      alert("Wrong ID or Password");
+      //alert("Wrong ID or Password");
     }
   };
 };

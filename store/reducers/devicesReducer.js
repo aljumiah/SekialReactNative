@@ -17,7 +17,7 @@ const devicesReducer = (state = initialState, action) => {
     case actionTypes.DEVICE_LOADING:
       return {
         ...state,
-        loading: true
+        loading: action.payload
       };
     case actionTypes.TRANSFARE_OWNER:
       return {

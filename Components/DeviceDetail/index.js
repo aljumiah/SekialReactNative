@@ -69,6 +69,17 @@ class DeviceDetail extends React.Component {
           <>
             {device.is_alerted ? (
               <Content style={{ marginTop: "50%" }}>
+                {!!this.props.errors.length && (
+                  <List style={{ marginLeft: 10 }}>
+                    {this.props.errors.map(error => (
+                      <List key={error}>
+                        <Text style={{ color: "#f1c601" }}>
+                          <Text style={{ color: "#f1c601" }}>{error}</Text>
+                        </Text>
+                      </List>
+                    ))}
+                  </List>
+                )}
                 <Button
                   block
                   rounded
@@ -80,6 +91,17 @@ class DeviceDetail extends React.Component {
               </Content>
             ) : (
               <Content style={{ marginTop: "50%" }}>
+                {!!this.props.errors.length && (
+                  <List style={{ marginLeft: 10 }}>
+                    {this.props.errors.map(error => (
+                      <List key={error}>
+                        <Text style={{ color: "#f1c601" }}>
+                          <Text style={{ color: "#f1c601" }}>{error}</Text>
+                        </Text>
+                      </List>
+                    ))}
+                  </List>
+                )}
                 <Button
                   style={{ borderColor: "#00F7EA", marginTop: 10 }}
                   block
@@ -121,7 +143,8 @@ class DeviceDetail extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  loading: state.devicesReducer.loading
+  loading: state.devicesReducer.loading,
+  errors: state.errorReducer.errors
 });
 
 const mapDispatchToProps = dispatch => ({
