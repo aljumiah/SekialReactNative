@@ -11,7 +11,11 @@ import {
   Label,
   Spinner,
   ListItem,
-  List
+  List,
+  Card,
+  CardItem,
+  View,
+  Icon
 } from "native-base";
 import { withNavigation } from "react-navigation";
 import { LinearGradient } from "expo";
@@ -60,7 +64,51 @@ class TransfareOwner extends React.Component {
           <Spinner color="#00F7EA" />
         ) : (
           <Content>
-            <Form style={{ marginTop: "50%" }}>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                marginLeft: "30%",
+                paddingTop: "20%"
+              }}
+            >
+              <Icon
+                style={{ width: 50, fontSize: 50, color: "#fff" }}
+                type="Entypo"
+                name="mobile"
+              />
+              <Icon
+                style={{ width: 50, fontSize: 50, color: "#00F7EA" }}
+                type="MaterialCommunityIcons"
+                name="transfer-right"
+              />
+              <Icon
+                style={{ width: 50, fontSize: 50, color: "#fff" }}
+                type="Entypo"
+                name="user"
+              />
+            </View>
+            <Form style={{ marginTop: "10%" }}>
+              <Text
+                style={{
+                  color: "#fff",
+                  paddingLeft: 20,
+                  paddingRight: 10,
+                  fontWeight: "300"
+                }}
+              >
+                <Text style={{ color: "#f1c601", fontWeight: "600" }}>
+                  Important:{" "}
+                </Text>
+                When entering the ID number, the device is going to be
+                transfared to the new owner and the device will no longer be
+                shown in your device list.
+              </Text>
+              <Text
+                style={{ color: "#fff", fontWeight: "600", paddingLeft: 20 }}
+              >
+                ID must be more than 10 characters
+              </Text>
               {!!this.props.errors.length && (
                 <List style={{ marginLeft: 10 }}>
                   {this.props.errors.map(error => (

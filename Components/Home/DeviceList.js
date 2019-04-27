@@ -22,9 +22,16 @@ class DeviceList extends React.Component {
               <Icon
                 name="mobile"
                 type="Entypo"
-                style={{ color: "#f1c601", marginRight: 10 }}
+                style={{
+                  color: "#f1c601",
+                  marginRight: 10,
+                  fontSize: 40,
+                  width: 40
+                }}
               />
-              <Text style={{ color: "#f1c601", fontWeight: "700" }}>
+              <Text
+                style={{ color: "#f1c601", fontWeight: "700", fontSize: 20 }}
+              >
                 {device.iemi_id}
               </Text>
             </Left>
@@ -33,7 +40,7 @@ class DeviceList extends React.Component {
               <Icon
                 name="exclamationcircle"
                 type="AntDesign"
-                style={{ color: "#f1c601" }}
+                style={{ color: "#f1c601", fontSize: 30 }}
               />
             </Right>
           </ListItem>
@@ -41,7 +48,8 @@ class DeviceList extends React.Component {
           <ListItem
             // style={{ backgroundColor: "#B8D0EB" }}
             style={{
-              backgroundColor: "transparnt"
+              backgroundColor: "transparnt",
+              fontSize: 100
             }}
             last
             onPress={() =>
@@ -52,9 +60,21 @@ class DeviceList extends React.Component {
               <Icon
                 name="mobile"
                 type="Entypo"
-                style={{ marginRight: 10, color: "#00F7EA" }}
+                style={{
+                  marginRight: 10,
+                  color: "#00F7EA",
+                  fontSize: 40,
+                  width: 40
+                }}
               />
-              <Text style={{ color: "#00F7EA", fontWeight: "700" }}>
+              <Text
+                style={{
+                  paddingLeft: 0,
+                  color: "#00F7EA",
+                  fontWeight: "700",
+                  fontSize: 20
+                }}
+              >
                 {device.iemi_id}
               </Text>
             </Left>
@@ -63,7 +83,7 @@ class DeviceList extends React.Component {
               <Icon
                 name="ios-arrow-forward"
                 type="Ionicons"
-                style={{ color: "#00F7EA" }}
+                style={{ color: "#00F7EA", fontSize: 30 }}
               />
             </Right>
           </ListItem>

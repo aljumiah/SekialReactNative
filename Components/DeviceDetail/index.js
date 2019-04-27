@@ -2,7 +2,17 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
-import { Button, Content, Text, Spinner } from "native-base";
+import {
+  Button,
+  Content,
+  Text,
+  Spinner,
+  List,
+  Icon,
+  Right,
+  Left,
+  Body
+} from "native-base";
 import { withNavigation } from "react-navigation";
 import { LinearGradient } from "expo";
 import DeviceID from "./DeviceID";
@@ -68,7 +78,51 @@ class DeviceDetail extends React.Component {
         ) : (
           <>
             {device.is_alerted ? (
-              <Content style={{ marginTop: "50%" }}>
+              <Content style={{ marginTop: "30%" }}>
+                <Icon
+                  name="mobile"
+                  type="Entypo"
+                  style={{
+                    marginRight: 10,
+                    color: "#fff",
+                    fontSize: 100,
+                    paddingLeft: "40%"
+                  }}
+                />
+                <Text
+                  style={{
+                    color: "#f1c601",
+                    paddingLeft: "27%",
+                    paddingRight: 10,
+
+                    fontWeight: "600",
+                    fontSize: 16
+                  }}
+                >
+                  Your device in alerted list!
+                </Text>
+                <Text
+                  style={{
+                    color: "#fff",
+                    paddingLeft: 20,
+                    paddingRight: 10,
+                    fontWeight: "300",
+                    fontSize: 16,
+                    paddingBottom: 20
+                  }}
+                >
+                  Press the button{" "}
+                  <Text
+                    style={{
+                      color: "#fff",
+                      fontWeight: "500",
+                      fontSize: 16
+                    }}
+                  >
+                    Remove Alert
+                  </Text>{" "}
+                  to remove the device from the alerted devices
+                </Text>
                 {!!this.props.errors.length && (
                   <List style={{ marginLeft: 10 }}>
                     {this.props.errors.map(error => (
@@ -81,16 +135,27 @@ class DeviceDetail extends React.Component {
                   </List>
                 )}
                 <Button
+                  style={{ backgroundColor: "#f1c601" }}
                   block
                   rounded
-                  warning
                   onPress={() => this.removeAlert()}
                 >
-                  <Text>Remove Alert</Text>
+                  <Text style={{ color: "#042630" }}>Remove Alert</Text>
                 </Button>
               </Content>
             ) : (
-              <Content style={{ marginTop: "50%" }}>
+              <Content style={{ marginTop: "20%" }}>
+                <Icon
+                  name="mobile"
+                  type="Entypo"
+                  style={{
+                    marginRight: 10,
+                    color: "#fff",
+                    fontSize: 100,
+                    paddingLeft: "40%",
+                    paddingBottom: "10%"
+                  }}
+                />
                 {!!this.props.errors.length && (
                   <List style={{ marginLeft: 10 }}>
                     {this.props.errors.map(error => (
@@ -102,10 +167,10 @@ class DeviceDetail extends React.Component {
                     ))}
                   </List>
                 )}
+
                 <Button
                   style={{ borderColor: "#00F7EA", marginTop: 10 }}
                   block
-                  rounded
                   transparent
                   bordered
                   onPress={() =>
@@ -114,10 +179,52 @@ class DeviceDetail extends React.Component {
                     })
                   }
                 >
-                  <Text style={{ color: "#00F7EA", fontWeight: "700" }}>
-                    Transfare Ownership
-                  </Text>
+                  <Body>
+                    <Text style={{ color: "#00F7EA", fontWeight: "700" }}>
+                      Transfare Ownership
+                    </Text>
+                  </Body>
+                  <Right>
+                    <Icon
+                      name="ios-arrow-forward"
+                      type="Ionicons"
+                      style={{ color: "#00F7EA", paddingRight: 20 }}
+                    />
+                  </Right>
                 </Button>
+                <Text
+                  style={{
+                    color: "#fff",
+                    paddingLeft: 20,
+                    paddingRight: 10,
+                    paddingTop: 30,
+                    fontWeight: "600",
+                    fontSize: 16
+                  }}
+                >
+                  Did you lost your device?
+                </Text>
+                <Text
+                  style={{
+                    color: "#fff",
+                    paddingLeft: 20,
+                    paddingRight: 10,
+                    fontWeight: "300",
+                    fontSize: 16
+                  }}
+                >
+                  Press the button{" "}
+                  <Text
+                    style={{
+                      color: "#fff",
+                      fontWeight: "500",
+                      fontSize: 16
+                    }}
+                  >
+                    Lost The Device
+                  </Text>{" "}
+                  to add the device to the alerted devices
+                </Text>
                 <Button
                   style={{
                     borderColor: "#f1c601",
